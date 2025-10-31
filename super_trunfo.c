@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
+//Estrutura de dados que representa uma carta
 struct card {
  	char state;
 	char id[4];
@@ -41,7 +42,6 @@ int main () {
 	scanf("%d", &card1.touristAttractions);
 
 	printf("\nInsira os dados da carta 2\n");
-
     printf("Estado: ");
     scanf(" %c", &card2.state); 
 
