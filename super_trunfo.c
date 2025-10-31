@@ -1,17 +1,18 @@
 #include <stdio.h>
-#include <string.h>
+#include <math.h>
 
 //Estrutura de dados que representa uma carta
 struct card {
  	char state;
 	char id[4];
 	char city[50];
-	int population;
+	unsigned long int population;
 	float area;
 	float pib;
 	int touristAttractions;
 	float populationDensity;
 	float gdpPerCapita; //Pib per capita
+	float superPower;
 };
 
 int main () {
@@ -45,8 +46,8 @@ int main () {
 
 	//Cálculos
 	card1.populationDensity = card1.population / card1.area;
-	card1.gdpPerCapita = card1.pib * 1000000000 / card1.population;
-
+	card1.gdpPerCapita = card1.pib * pow(10,9) / card1.population;
+	card1.superPower = (float) card1.population + (float) card1.touristAttractions + card1.area + card1.pib + card1.gdpPerCapita + (1/card1.populationDensity);
 
 	printf("\nInsira os dados da carta 2\n");
     printf("Estado: ");
@@ -71,9 +72,12 @@ int main () {
 	scanf("%d", &card2.touristAttractions);
 
 	card2.populationDensity = card2.population / card2.area;
-	card2.gdpPerCapita = card2.pib * 1000000000 / card2.population;
+	card2.gdpPerCapita = card2.pib * pow(10,9) / card2.population;
+	card2.superPower = (float) card2.population + (float) card2.touristAttractions + card2.area + card2.pib + card2.gdpPerCapita + (1/card2.populationDensity);
 
-	printf("\n\nVISUALIZAÇÃO DE DADOS\n\n");
+
+	printf("---------------------------------------------------------------");
+	printf("\nVISUALIZAÇÃO DE DADOS\n");
 	printf("\nDados da carta 1");
 	printf("\nEstado: %c", card1.state);
 	printf("\nCódigo: %s", card1.id);
@@ -95,6 +99,18 @@ int main () {
 	printf("\nNúmero de pontos turísticos: %d", card2.touristAttractions);
 	printf("\nDensidade populacional: %.2f hab/km²", card2.populationDensity);
 	printf("\nPib per capita: %.2f reais\n", card2.gdpPerCapita);
+
+	//comparações feitas usando operador ternário para facilitar a legibilidade.
+	printf("---------------------------------------------------------------");
+	printf("\nComparação de dados\n");
+	printf("\nPopulação: %s", card1.population > card2.population ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nÁrea: %s", card1.area > card2.area ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nPIB: %s", card1.pib > card2.pib ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nPontos turísticos: %s", card1.touristAttractions > card2.touristAttractions ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nDensidade populacional: %s", card1.populationDensity < card2.populationDensity ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nPib per capita: %s", card1.gdpPerCapita > card2.gdpPerCapita ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+	printf("\nSuper poder: %s\n", card1.superPower > card2.superPower ? "Carta 1 venceu (1)" : "Carta 2 venceu (0)");
+
 
 	return 0;
 }
